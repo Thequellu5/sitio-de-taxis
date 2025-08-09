@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Country Club Taxis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
+
+    header {
+      background-color: #004aad;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      background-color: white;
+    }
+
+    .info {
+      flex: 1 1 400px;
+      padding: 20px;
+    }
+
+    .info h2 {
+      color: #004aad;
+    }
+
+    .info p {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .formulario {
+      flex: 1 1 400px;
+      background: #f0f0f0;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .formulario h3 {
+      margin-top: 0;
+    }
+
+    .formulario select,
+    .formulario input,
+    .formulario button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .formulario button {
+      background-color: #004aad;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .formulario button:hover {
+      background-color: #003380;
+    }
+
+    .call-buttons {
+      margin-top: 20px;
+    }
+
+    .call-buttons button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      background-color: white;
+      border: 2px solid #004aad;
+      color: #004aad;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .call-buttons button:hover {
+      background-color: #004aad;
+      color: white;
+    }
+
+    footer {
+      background-color: #004aad;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    
+    #precio {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #dff0d8;
+      border: 1px solid #3c763d;
+      border-radius: 5px;
+      color: #3c763d;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Country Club Taxis</h1>
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#">Servicios</a>
+      <a href="#">Tarifas</a>
+      <a href="#">Flota</a>
+      <a href="#">Contacto</a>
+      <a href="tel:5593126449">📞 55 9312 6449</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="info">
+      <img src="https://via.placeholder.com/300x150?text=Country+Club+Logo" alt="Logo">
+      <h2>Servicio de taxis seguro y confiable en Huixquilucan</h2>
+      <p>Más de 15 años llevándote a tu destino con puntualidad, seguridad y comodidad.</p>
+      <div class="call-buttons">
+        <button>📅 Reserva ahora</button>
+        <button>📞 Llamar ahora</button>
+      </div>
+    </div>
+
+    <div class="formulario">
+      <h3>Reserva tu viaje</h3>
+
+      <!-- Municipio -->
+      <label for="municipio">Municipio</label>
+      <select id="municipio" onchange="cargarColonias()">
+        <option value="">-- Selecciona un municipio --</option>
+        <option value="huixquilucan">Huixquilucan</option>
+        <option value="naucalpan">Naucalpan</option>
+        <option value="acolman">Acolman</option>
+        <option value="atizapan">Atizapán</option>
+        <option value="coacalco">Coacalco</option>
+        <option value="chicoloapan">Chicoloapan</option>
+        <option value="chimalhuacan">Chimalhuacán</option>
+        <option value="cuautitlan_izcalli">Cuautitlán Izcalli</option>
+        <option value="cuautitlan_de_romero_rubio">Cuautitlán de Romero Rubio</option>
+        <option value="ecatepec_de_morelos">Ecatepec de Morelos</option>
+        <option value="ixtapaluca">Ixtapaluca</option>
+        <option value="jardines_de_morelos">Jardines de Morelos</option>
+        <option value="de_la_paz">La Paz</option>
+        <option value="nezahualcoyotl">Nezahualcóyotl</option>
+        <option value="nicolas_romero">Nicolás Romero</option>
+        <option value="tecamac">tecamac</option>
+        <option value="texcoco">texcoco</option>
+        <option value="tepotzotlan">tepotzotlan</option>
+        <option value="tlalnepantla">tlalnepantla</option>
+        <option value="tultepec">tultepec</option>
+        <option value="tultitlan">tultitlan</option>
+        <option value="valle_de_chalco">Valle de Chalco</option>
+      </select>
+
+      <!-- Colonia -->
+      <label for="colonia">Colonia / Calle</label>
+      <select id="colonia">
+        <option value="">-- Selecciona una colonia --</option>
+      </select>
+
+      <!-- Precio estimado -->
+      <div id="precio"></div>
+
+      <!-- Pasajeros -->
+      <label for="pasajeros">Pasajeros</label>
+      <select id="pasajeros">
+        <option>1 pasajero</option>
+        <option>2 pasajeros</option>
+        <option>3 pasajeros</option>
+        <option>4 pasajeros</option>
+      </select>
+
+      <!-- Botón -->
+      <button>🚖 Solicitar taxi</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Country Club Taxis. Todos los derechos reservados.
+  </footer>
+
+  <!-- Script para actualizar colonias -->
+  <script>
+    function cargarColonias() {
+      const colonias = {
+        huixquilucan: [
+          "DOS Ríos", "AGUA BENDITA (+ CASETA DE IDA)", "AGUA BLANCA (+ CASETA DE IDA)", "ALLENDE (+ CASETA DE IDA)",
+          "BOSQUE REAL DENTRO", "BOSQUE REAL AFUERA", "CANALES", "EL ARENAL", "EL HIELO (+ CASETA DE IDA)",
+          "EL MIRADOR", "HUIXQUILUCAN CENTRO", "LA MAGDALENA HASTA VERIFICENTRO",
+          "LA MAGDALENA PASANDO VERIFICENTRO (LA MANZANA)", "LA MARQUEZA", "LAS RAJAS", "LERMA CENTRO + CASETA",
+          "SAN MIGUEL LLANO GRANDE", "SAN BARTOLITO", "SAN CRISTOBAL", "SAN FERNANDO", "SAN FRANCISCO",
+          "SAN JOSE HUILOTEAPAN", "SAN PABLO 'CHIMALPA'", "SANTA CRUZ", "SANTA CRUZ CANALES", "SANTA CRUZ SANTUARIO",
+          "SAN RAMON", "TREJO", "XONACATLAN CENTRO + CASETA", "ZACAMULPA"
+        ],
+        naucalpan: [
+          "AHUIZOTIA", "ALCANFORES", "ALFREDO V. BONFIL", "ALTAMIRA", "AMPLIACION BENITO JUAREZ", "BENITO JUAREZ",
+          "BODEGA AURRERA (RIO HONDO) Y LA MIRA MAR", "BOSQUE DE ECHEGARAY", "BOULEVARES", "BUENA VISTA",
+          "CENTRO BANAMEX Y COMITÉ OLIMPICO", "CIUDAD BRISA", "CIUDAD SATELITE (CIRCUITOS)",
+          "CIUDAD SATELITE (ZONA COMERCIAL)", "COLEGIO MIRAFLORES", "COLINAS DE SAN MATEO", "COLONIA ECHEGARAY",
+          "COUNTRY HASTA LA PALMA", "CUMBRES DEL HIMALAYA", "EL CONDE", "EL PARQUE", "EXPLANADA DE LAS FUENTES",
+          "FUENTES DE SATELITE", "HEROES DE LA REVOLUCION", "HIDALGO HASTA LOS JUEGOS",
+          "HUIZACHAL RICARDO FLORES MAGON LAZARO CARDENAS", "INDUSTRIA ALCE BLANCO", "INDUSTRIAL 1RO DE MAYO",
+          "INDUSTRIALSAN ANDRES ATOTO", "IZCALLI CHAMAPA (+ CASETA DE IDA)", "JARDINES DE SAN MATEO",
+          "JARDINES DE SATELITE", "LA CAÑADA HASTA LA DESVIACION A SAN ANTONIO",
+          "LA CAÑADA HASTA OFICINAS DE OAPAAS", "LA CUSPIDE", "LA FLORIDA", "LA GLORIETA EDO DE MEXICO DESPUES DEL HIELO",
+          "LA MANCHA (HASTA EL MODULO)", "LA MANCHA 1 Y 11", "LA MANCHA 111 Y IV", "LA OLIMPICA (+ CASETA DE IDA)",
+          "LA ROMANA", "LAS ALTEÑAS", "LAS AMERICAS", "LAS HUERTAS 1RA Y 2DA SECCION",
+          "LAS HUERTAS 3RA SECCION", "LAS PALOMAS", "LAZARO CARDENAS", "LOMA COLORADA", "LOMA LINDA",
+          "LOMAS DE BELLA VISTA", "LOMAS DE BOULEVARES", "LOMAS DE CANTERA", "LOMAS DE SAN AGUSTIN",
+          "LOMAS DE SAN MATEO", "LOMAS DEL CADETE", "LOMAS DEL RIO DESPUES DEL RIO", "LOMAS HIPODROMO",
+          "LOMAS VERDES 1RA Y 2DA SECCION", "LOMAS VERDES 3RA SECCION", "LOMAS VERDES 4TA SECCION",
+          "LOMAS VERDES 5TA SECCION", "LOS ARCOS", "LOS CUARTOS CAPULIN (+ CASETA DE IDA)", "LOS REMEDIOS",
+          "MANUEL AVILA CAMACHO (PUERTA 3)", "MARTIRES RIO BLANCO", "MEXICO 68", "MEXICO 86",
+          "MINAS CARACOL (+ CASETA DE IDA)", "MINAS COYOTE(+ CASETA DE IDA)", "MINAS PALACIO (+ CASETA DE IDA)",
+          "MINAS TECOLOTE(+ CASETA DE IDA)", "MODELO", "MOLINITO", "MOLINITO X PISTA + CASETA",
+          "OLIMPIADA(+ CASETA DE IDA)", "PARQUE INDUSTRIAL NAUCALPAN", "PASEO DEL BOSQUE DE ECHEGARAY",
+          "PEDREGAL DE ECHEGARAY", "PEDREGAL, CANTERAS", "PLAN DE AYALA", "PLAZA HIPODROMO ANTES DEL CABALLO BALLO",
+          "PRADERAS DE SAN MATEO", "RINCON DE ECHEGARAY", "RINCON DEL BOSQUE", "RINCON VERDE", "RIO HONDO",
+          "SAN ANTONIO SOMEYUCAN", "SAN BARTOLO NAUCALPAN CENTRO", "SAN ESTEBAN",
+          "SAN FRANCISCO CHIMALPA (+ CASETA DE IDA)", "SAN FRANCISCO CUAUTLALPAN", "SAN JOSE POZA HONDA(+ CASETA DE IDA)",
+          "SAN JUAN TOTOLTEPEC", "SAN LORENZO TOTOLINGA Y LA RAQUELITO", "SAN LUIS TLATILCO",
+          "SAN RAFAEL CHAMAPA 1RA Y 2DA SECCION", "SAN RAFAEL CHAMAPA 3RA Y 4TA SECCION",
+          "SANJOSE DE LOS LEONES 1RA Y 2DA SECCION", "SANJOSE DE LOS LEONES 3RA SECCION", "SANTA CRUZ ACATLAN",
+          "SANTA CRUZ DEL MONTE", "SANTA ROSA", "TECAMACHALCO AV DE LAS FUENTES", "TECAMACHALCO AV DE LOS BOSQUES",
+          "TECAMACHALCO ZONA DE BANCOS", "VALLE DORADO (CHAMAPA)", "VICENTE GUERRERO", "VISTA DEL VALLE"
+        ],
+        acolman: [
+          "LOS REYES TEPEXPAN",
+          "ACOLMAN CENTRO",
+          "AMPLACION LOS ANGELES",
+          "ANAHUAC",
+          "BENITO JUAREZ",
+          "DOS ZANJAS",
+          "EMILIANO ZAPATA",
+          "LA ERA",
+          "LAS GRANJAS ALCOMAN",
+          "LAZARO CARDENAS",
+          "LOMAS DE SANTA CATARINA",
+          "LOS ANGELES",
+          "PLAN DE GUADALUPE",
+          "PUEBLO DE CAUNALAN",
+          "RADIO FARO TOTOLCINGO",
+          "SAN FRANCISCO ZACANGO",
+          "SAN MATEO CHIPILTEPEC",
+          "SAN MIGUEL TOTOLCINGO",
+          "SANTA CATARINA ALCOMAN",
+          "SANTA CRUZ",
+          "SANTA MARIA DE GUADALUPE",
+          "TENANGO",
+          "TEPEXPAN CENTRO",
+          "TETEZCALA"
+        ],
+        atizapan: [
+          "5 DE MAYO",
+          "ADOLFO LOPEZ MATEOS",
+          "ALAMEDAS",
+          "ALFREDO V BONFIL",
+          "ARBOLEDAS",
+          "ATIZAPAN CENTRO",
+          "ATIZAPAN MODERNO",
+          "ATIZAPAN 2000",
+          "BOSQUES DE IXTACALA",
+          "BOSQUES DE PRIMAVERA",
+          "BOSQUES DEL LAGO",
+          "CENTRAL DE ABASTOS",
+          "CERRO GRANDE",
+          "CHILUCA (+CASETA DE IDA)",
+          "CLUB DE GOLF BELLA VISTA",
+          "CLUB DE GOLF CHILUCA",
+          "CLUB DE GOLF HACIENDA",
+          "CLUB DE GOLF VALLE ESCONDIDO",
+          "CONDADO DE ZAYAVEDRA",
+          "CONDO PLAZAS CHILUCA",
+          "EJIDO ESPIRITO SANTO",
+          "EJIDOS DE SAN MIGUEL",
+          "EL CALVARIO",
+          "EL CERRITO",
+          "LOMA DE VALLE ESCONDIDO",
+          "LOMAS DE ATIZAPAN 1RA SECCION",
+          "LOMAS DE ATIZAPAN 2DA SECCION",
+          "LOMAS DE BELLA VISTA",
+          "LOMAS CAPISTRANO",
+          "LOMAS DE GUADALUPE",
+          "LOMAS DE LA HACIENDA",
+          "LOMAS MONTEMARIA",
+          "LOMAS DE SAN MIGUEL",
+          "LOMAS LINDAS",
+          "LOS ALAMOS",
+          "LOS CLUBES",
+          "LUIS DONALDO COLOSIO",
+          "MARGARITA MAZA DE JUAREZ",
+          "MAYORAZGOS DEL BOSQUE",
+          "MAYORAZGOS DE LOS GIGANTES",
+          "MEXICO 86",
+          "MEXICO NUEVO",
+          "MIRAFLORES",
+          "MORELOS",
+          "PALACIO MUNICIPAL",
+          "PARAISO AVICOLA",
+          "PEDREGAL DE ATIZAPAN",
+          "PLAZA ATIZAPAN",
+          "EL CHAPARRAL",
+          "EL PEDREGAL",
+          "EMILIANO ZAPATA",
+          "EX HACIENDA EL PEDREGAL",
+          "CALACOAYA",
+          "IZCALLI EL CAMPANARIO",
+          "PRADO LARGO",
+          "HACENDA DE LA LUZ",
+          "HACIENDA VALLE ESCONDIDO",
+          "HOGARES DE ATIZAPAN",
+          "IGNACIO LOPEZ RAYON",
+          "JARDINES DE ATIZAPAN",
+          "JARDINES DE BELLA VISTA",
+          "JARDINES DE MONTERREY",
+          "LA CAÑADA",
+          "LA CONDESA",
+          "LA ESTADIA",
+          "LA PALMA",
+          "LAS FLORES",
+          "LAS PEÑITAS",
+          "LAS AGUILAS",
+          "LAS PEÑITAS 1",
+          "PRADOS DE IZTACALA",
+          "CRISTOBAL HIGUERA",
+          "REVOLUCION",
+          "RINCON DE LOS BOSQUES",
+          "RINCONADA LAS ARBOLEDAS",
+          "SAGITARIO 1",
+          "SAGITARIO 2",
+          "SAN JOSE DEL JARAL",
+          "SAN JUAN BOSCO",
+          "SAN JUAN IXTACALA",
+          "SAN MATEO TECOLOAPAN",
+          "SAN MIGUEL XOCHIMANDA",
+          "TECNOLOGICO DE MONTERREY (MAS CASETAS)",
+          "TEPALCAPA",
+          "TORRES DE ATIZAPAN",
+          "UNITEC",
+          "VALLE NUEVO",
+          "VALLE DE ARBOLEDAS",
+          "VILLA DE LAS PALMAS",
+          "VILLA DE LAS TORRES",
+          "VILLA JARDIN",
+          "VILLAS DE LA HACIENDA",
+          "VILLAS DE SAN JOSE"
+        ],
+        coacalco: [
+        "ARBOLEDAS DE COACALCO",
+        "BOSQUES DE COACALCO",
+        "BOSQUES DEL VALLE 1RA SECCION",
+        "BOSQUES DEL VALLE 2DA SECCION",
+        "CAPULLI DEL VALLE",
+        "CONJUNTO JALATLACO",
+        "CONJUNTO COACALCO",
+        "CONJUNTO DEL VALLE",
+        "CONJUNTO INDEPENDENCIA",
+        "CONJUNTO MAGNOLIAS",
+        "EL PANTANO",
+        "EL PERIODISTA",
+        "EL POTRERO",
+        "HACIENDA DE SAN FELIPE",
+        "EX RANCHO SAN FELIPE",
+        "FRACCIONAMIENTO EL LAUREL",
+        "FRACCIONAMIENTO CHAPARRAL",
+        "FUENTE DE SAN FRACISCO",
+        "GRANJAS DE SAN CRISTOBAL",
+        "HACIENDA DE CRUZTITLAN",
+        "HACIENDA SAN PABLO",
+        "JARDINES DE SAN JOSE",
+        "LAS HIEDRAS",
+        "LAS LLANURAS",
+        "LAS VILLAS",
+        "LOMA BONITA",
+        "LOMAS DE COACALCO",
+        "LOMAS DEL SOL",
+        "LOS ACUALES",
+        "PARQUE RECIDENCIAL COACALCO 1RA SECC.",
+        "PARQUE RECIDENCIAL COACALCO 2DA SECC.",
+        "PARQUE RECIDENCIAL COACALCO 3RA SECC.",
+        "PLAZA DE KIOSKO",
+        "PLAZA LAS FLORES",
+        "REPUBLICA MEXICANA",
+        "RECIDENCIAL VILLA FLORIDA",
+        "RECIDENCIAL COACALCO",
+        "RINCON DE LAS FUENTES",
+        "RINCONADA DE COACALCO",
+        "SAN JOSE EJIDAL",
+        "SAN JOSE EL GIGANTE",
+        "SAN RAFAEL COACALCO",
+        "SANTA MARIA 1",
+        "SANTA MARIA 2",
+        "SANTA MARIA MAGDALENA",
+        "UNIDAD POTRERO LA LAGUNA",
+        "UNIDAD COACALCO",
+        "UNIDAD HABITACIONAL LOS PORTALES",
+        "VILLA DE LAS FLORES",
+        "ZACUATITLAN",
+        "AMPLIACION SAN PABLO",
+        "CASAS ALFA",
+        "CONJUNTO LOS CLAUSTROS",
+        "EL PROGRESO",
+        "EL RELOJ",
+        "EL ROSIO",
+        "FRACCIONAMIENTO EL PARO",
+        "FRACCIONAMIENTO ESTEPAS",
+        "GRANJAS SAN PABLO",
+        "INFONAVIT L64",
+        "INFONAVIT L82",
+        "INFONAVIT LA ISLA",
+        "IZCALLI SAN PABLO",
+        "JOSE MARIA MORELOS Y PAVON",
+        "LA ARBOLADA",
+        "LA AURORA",
+        "LA LLANURA VERDE",
+        "LOS ARCOS 1",
+        "MARIANO ESCOBEDO",
+        "PARQUE SAN PABLO",
+        "PRADOS DE ECATEPEC",
+        "PRADOS SECCION A",
+        "SAN PABLO DE LAS SALINAS",
+        "SUSTITUCION ARISTA",
+        "UNIDAD HABITACIONAL PENSAMIENTO"
+        ],
+        chicoloapan: [
+          "BARRIO SAN ANTONIO",  
+          "EJERCITO DEL TRABAJO",  
+          "EL ARENAL",  
+          "EMILIANO ZAPATA",  
+          "GUADALUPE",  
+          "JIMENEZ CANTU",  
+          "LA PALMA",  
+          "LOMA DE BUENA VISTA",  
+          "LOMAS DE SAN PABLO",  
+          "PORTEZUELOS",  
+          "PRESIDENTES",  
+          "REVOLUCION",  
+          "SAN JOSE",  
+          "SAN SEBASTIAN CHIMALPA",  
+          "SAN VICENTE CHICOLAPAN",  
+          "SANTA MARIA CHIMALHUACAN",  
+          "SANTA ROSA",  
+          "UNIDAD HABITACIONAL AURIS",  
+          "VENUSTIANO CARRANZA"  
+        ],
+        chimalhuacan: [
+          "2 DE MARZO",
+          "AMPLIACION SAN LORENZO",
+          "ANTORCHISTA",
+          "BALCONES SAN AGUSTIN",
+          "BARRIO ALFAREROS",
+          "BARRIO APAPASCO",
+          "BARRIO CANTEROS",
+          "BARRIO CURTIDORES",
+          "BARRIO EBANISTAS",
+          "BARRIO FUNDIDORES",
+          "BARRIO HOJALATEROS",
+          "BARRIO JUGUETEROS",
+          "BARRIO LA ROSITA",
+          "BARRIO LABRADORES",
+          "BARRIO LAS PALOMAS",
+          "BARRIO ORFEBRES",
+          "BARRIO PLATEROS",
+          "BARRIO SAN HIPOLITO",
+          "BARRIO SARAPEROS",
+          "BARRIO TALABARTEROS",
+          "BARRIO TALLADORES",
+          "BARRIO TEJEDORES",
+          "BARRIO TRANSPORTISTAS",
+          "BARRIO VIDRIEROS",
+          "BUENOS AIRES",
+          "CIUDAD ALEGRE",
+          "COPALERA",
+          "EL LLANO",
+          "EL REFUGIO",
+          "EX HACIENDA EL MOLINO",
+          "FILIBERTO GOMEZ",
+          "ISRAEL",
+          "JARDINES DE ACUITLAPILCO",
+          "JARDINES SAN AGUSTIN",
+          "LA JOYITA",
+          "LOMA DE CHIMALHUACAN",
+          "LOMA DE SANTA CRUZ",
+          "LOMAS DE SANTA MARIA",
+          "LUIS CORDORA REYES",
+          "MARAVILLAS",
+          "NUEVA MARGARITA",
+          "OLMEDO",
+          "SAN JOSE BUENA VISTA",
+          "SAN JUAN",
+          "SAN LORENZO",
+          "SAN LORENZO PARTE ALTA",
+          "SAN MIGUEL",
+          "SAN NORBERTO",
+          "SAN PABLO",
+          "SAN PEDRO",
+          "SANTA MARIA CHIMALHUACAN",
+          "TEPALCATES",
+          "TEQUESQUINAHUAC",
+          "TIERRA SANTA",
+          "TLAIXCO",
+          "TLATELCO",
+          "TLAYACAPA",
+          "VILLA DE LOS COLORINES",
+          "VILLA SAN LORENZO CHIMALCO",
+          "XALTIPAC",
+          "XOCHIACA",
+          "XOCHITENCO"
+        ],
+        cuautitlan_izcalli: [
+          "ARBOLEDAS DE SAN MIGUEL",
+          "ARCOS DE LA HACIENDA",
+          "ARCOS DEL ALBA",
+          "ATLANTA",
+          "BARRIO CONASUPO",
+          "BARRIO DEL PANTEON",
+          "BARRO HUAPANGO",
+          "BARRIO JALTIPA",
+          "BARRIO LOS ARCOS",
+          "BELLA VISTA",
+          "BOSQUES DE LA HACIENDA",
+          "BOSQUES DE LOS PINOS",
+          "BOSQUES DE MORELOS",
+          "BOSQUES DE ALBA",
+          "BOSQUE DE ALBA II",
+          "CAMPESTRE DEL LAGO",
+          "CIUDAD WAL MART",
+          "CLAUSTROS DE SAN MIGUEL",
+          "COFRADA DE SAN MIGUEL",
+          "COLINAS DEL LAGO",
+          "COLONIA DEL TEPEYAC",
+          "COMPLEJO INDUSTRIAL COAMATLA",
+          "CORREDOR URBANO COMERCIAL",
+          "CUMERIA",
+          "DR. JORGE JIMENEZ CANTU",
+          "EJIDAL SAN ISIDRO",
+          "EJIDO SANTA TERESA",
+          "EJIDO SAN LUCAS",
+          "EJIDOS SAN ISIDRO",
+          "EL CERRITO",
+          "EL PROGRESO",
+          "EL ROSARIO",
+          "EN SUEÑOS",
+          "EX HACIENDA SAN MIGUEL",
+          "UNAM CUAUTITLAN",
+          "FRANCISCO VILLA",
+          "GALAXIA",
+          "GRANJAS LOMAS DE GUADALUPE",
+          "GRANJAS UNIDAS",
+          "HACIENDA EL PARQUE",
+          "INFONAVIT CAMPO 1",
+          "INFONAVIT FERROCARRILERA",
+          "INFONAVIT FIDEL VELASQUEZ",
+          "INFONAVIT NORTE",
+          "INFONAVIT SUR",
+          "VILLAS DE LAS FLORES",
+          "UNIDAD HABITACIONAL FOVISSA",
+          "UNIDAD HABITACIONAL NOPALTEPEC",
+          "VALLE DE LA HACIENDA",
+          "VALLE DE LAS FLORES",
+          "INFONAVIT TEPALCAPA",
+          "JARDINES DE LA HACIENDA NORTE",
+          "JARDINES DE LA HACIENDA SUR",
+          "JARDINES DEL ALBA",
+          "JOSE MARIA MORELOS Y PAVON",
+          "JOYAS DE ALBA",
+          "LA AURORA",
+          "LA HERRADURA",
+          "LA JOYITA",
+          "LA PERLA",
+          "LA PIEDAD",
+          "LA PRESITA",
+          "LA QUEBRADA",
+          "LAGO DE GUADALUPE",
+          "LAS CONCHITAS",
+          "LAS TORRES",
+          "LECHERIA",
+          "LOMAS DE CUATITLAN",
+          "LOMAS DEL BOSQUE",
+          "LOS ANGELES",
+          "LUIS ECHEVERRIA",
+          "MIRADOR SANTA ROSA",
+          "MONTE VERDE",
+          "NIÑOS HEROES", 
+          "PALACIO MUNICIPAL",
+          "PASEOS DEL ALBA",
+          "PERINORTE",
+          "PLAZA DORADA",
+          "PRADOS DE CUATITLAN",
+          "RINCON COLONIAL",
+          "SAN ANTONIO",
+          "SAN FRANCISCO TEPOJACO CENTRO",
+          "SAN ISIDRO",
+          "SAN JOSE HILANGO",
+          "SAN JUAN",
+          "SAN JUAN ATLANCA",
+          "SAN MARTIN TEPEXTITLAN",
+          "SAN MATEO IXTACALCO LA CAPILA",
+          "SAN MATEO IXTACALCO LA NORIA",
+          "SAN PABLO LOS GALLOS",
+          "SANTA MARIA GUADALUPE",
+          "SANTA MARIA TIANGUISTENGO",
+          "SANTA ROSA DE LIMA",
+          "SANTIAGO TEPALCPA",
+          "TIKAL",
+          "UNIDAD CIVICA BACARDY",
+          "VILLAS DE ALBA",
+          "VISTA HERMOSA",
+          "ZONA INDUSTRIAL CUAUTITLAN IZCALLI",
+          "ZONA INDUSTRIAL SAN MARTIN OBISPO"
+        ],
+        cuautitlan_de_romero_rubio: [
+          "BARRIO DEL CARMEN",
+          "BARRIO EL HUERTO",
+          "CONJUNTO INDUSTRIAL CUAUTITLAN",
+          "CONJUNTO TLATEPAN",
+          "CUAUTITLAN CEBADALES",
+          "CUAUTITLAN CENTRO",
+          "EL NOPALITO",
+          "EL PARAISO PROVISSTE",
+          "PARAISO",
+          "EL REPARTIDOR",
+          "LA CIUDADELA",
+          "LA ESTANCIA",
+          "LA PALMA",
+          "LA MISIONES",
+          "LAZARO CARDENAS",
+          "LOMA BONITA",
+          "LOS MORALES",
+          "LOS OLIVOS",
+          "MELCHOR OCAMPO CENTRO",
+          "NECAPA",
+          "NUEVA ESPAÑITA",
+          "PASEOS DE CUAUTITLAN",
+          "RANCHO SAN BLAS",
+          "ROMITA",
+          "SAN JUAN",
+          "SANTA ELENA",
+          "SANTA MARIA",
+          "SAN MATEO IZTACALCO",
+          "JUAN DIEGO",
+          "SAN BLAS",
+          "VILLA JARDIN",
+          "VILLAS DE CUAUTITLAN"
+        ],
+      };
+
+      const municipioSeleccionado = document.getElementById("municipio").value;
+      const coloniaSelect = document.getElementById("colonia");
+
+      coloniaSelect.innerHTML = '<option value="">-- Selecciona una colonia --</option>';
+
+      if (colonias[municipioSeleccionado]) {
+        colonias[municipioSeleccionado].forEach(colonia => {
+          const option = document.createElement("option");
+          option.value = colonia;
+          option.textContent = colonia;
+          coloniaSelect.appendChild(option);
+        });
+      }
+    }
+
+    const tarifas = {
+      "DOS Ríos": 200,
+      "AGUA BENDITA (+ CASETA DE IDA)": 240,
+      "AGUA BLANCA (+ CASETA DE IDA)": 240,
+      "ALLENDE (+ CASETA DE IDA)": 240,
+      "BOSQUE REAL DENTRO": 150,
+      "BOSQUE REAL AFUERA": 130,
+      "CANALES": 300,
+      "EL ARENAL": 130,
+      "EL HIELO (+ CASETA DE IDA)": 350,
+      "EL MIRADOR": 160,
+      "HUIXQUILUCAN CENTRO": 260,
+      "LA MAGDALENA HASTA VERIFICENTRO": 220,
+      "LA MAGDALENA PASANDO VERIFICENTRO (LA MANZANA)": 320,
+      "LA MARQUEZA": 350,
+      "LAS RAJAS": 370,
+      "LERMA CENTRO + CASETA": 450,
+      "SAN MIGUEL LLANO GRANDE": 330,
+      "SAN BARTOLITO": 160,
+      "SAN CRISTOBAL": 170,
+      "SAN FERNANDO": 150,
+      "SAN FRANCISCO": 250,
+      "SAN JOSE HUILOTEAPAN": 280,
+      "SAN PABLO 'CHIMALPA'": 300,
+      "SANTA CRUZ": 240,
+      "SANTA CRUZ CANALES": 260,
+      "SANTA CRUZ SANTUARIO": 300,
+      "SAN RAMON": 300,
+      "TREJO": 200,
+      "XONACATLAN CENTRO + CASETA": 130,
+      "ZACAMULPA": 650,
+
+      // === NAUCALPAN ===
+       "AHUIZOTIA": 220,
+        "ALCANFORES": 240,
+        "ALFREDO V. BONFIL": 190,
+        "ALTAMIRA": 220,
+        "AMPLIACION BENITO JUAREZ": 180,
+        "BENITO JUAREZ": 180,
+        "BODEGA AURRERA (RIO HONDO) Y LA MIRA MAR": 150,
+        "BOSQUE DE ECHEGARAY": 240,
+        "BOULEVARES": 240,
+        "BUENA VISTA": 150,
+        "CENTRO BANAMEX Y COMITÉ OLIMPICO": 180,
+        "CIUDAD BRISA": 280,
+        "CIUDAD SATELITE (CIRCUITOS)": 280,
+        "CIUDAD SATELITE (ZONA COMERCIAL)": 280,
+        "COLEGIO MIRAFLORES": 130,
+        "COLINAS DE SAN MATEO": 280,
+        "COLONIA ECHEGARAY": 250,
+        "COUNTRY HASTA LA PALMA": 130,
+        "CUMBRES DEL HIMALAYA": 240,
+        "EL CONDE": 220,
+        "EL PARQUE": 220,
+        "EXPLANADA DE LAS FUENTES": 130,
+        "FUENTES DE SATELITE": 280,
+        "HEROES DE LA REVOLUCION": 140,
+        "HIDALGO HASTA LOS JUEGOS": 160,
+        "HUIZACHAL RICARDO FLORES MAGON LAZARO CARDENAS": 130,
+        "INDUSTRIA ALCE BLANCO": 240,
+        "INDUSTRIAL 1RO DE MAYO": 220,
+        "INDUSTRIA LSAN ANDRES ATOTO": 220,
+        "IZCALLI CHAMAPA (+ CASETA DE IDA)": 240,
+        "JARDINES DE SAN MATEO": 270,
+        "JARDINES DE SATELITE": 280,
+        "LA CAÑADA HASTA LA DESVIACION A SAN ANTONIO": 180,
+        "LA CAÑADA HASTA OFICINAS DE OAPAAS": 180,
+        "LA CUSPIDE": 270,
+        "LA FLORIDA": 260,
+        "LA GLORIETA EDO DE MEXICO DESPUES DEL HIELO": 360,
+        "LA MANCHA (HASTA EL MODULO)": 170,
+        "LA MANCHA 1 Y 11": 180,
+        "LA MANCHA 111 Y IV": 220,
+        "LA OLIMPICA (+ CASETA DE IDA)": 220,
+        "LA ROMANA": 300,
+        "LAS ALTEÑAS": 240,
+        "LAS AMERICAS": 240,
+        "LAS HUERTAS 1RA Y 2DA SECCION": 280,
+        "LAS HUERTAS 3RA SECCION": 280,
+        "LAS PALOMAS": 310,
+        "LAZARO CARDENAS": 160,
+        "LOMA COLORADA": 260,
+        "LOMA LINDA": 220,
+        "LOMAS DE BELLA VISTA": 300,
+        "LOMAS DE BOULEVARES": 340,
+        "LOMAS DE CANTERA": 270,
+        "LOMAS DE SAN AGUSTIN": 220,
+        "LOMAS DE SAN MATEO": 250,
+        "LOMAS DEL CADETE": 190,
+        "LOMAS DEL RIO DESPUES DEL RIO": 150,
+        "LOMAS HIPODROMO": 160,
+        "LOMAS VERDES 1RA Y 2DA SECCION": 250,
+        "LOMAS VERDES 3RA SECCION": 250,
+        "LOMAS VERDES 4TA SECCION": 260,
+        "LOMAS VERDES 5TA SECCION": 280,
+        "LOS ARCOS": 250,
+        "LOS CUARTOS CAPULIN (+ CASETA DE IDA)": 220,
+        "LOS REMEDIOS": 250,
+        "MANUEL AVILA CAMACHO (PUERTA 3)": 180,
+        "MARTIRES RIO BLANCO": 180,
+        "MEXICO 68": 260,
+        "MEXICO 86": 270,
+        "MINAS CARACOL (+ CASETA DE IDA)": 250,
+        "MINAS COYOTE(+ CASETA DE IDA)": 250,
+        "MINAS PALACIO (+ CASETA DE IDA)": 250,
+        "MINAS TECOLOTE(+ CASETA DE IDA)": 250,
+        "MODELO": 240,
+        "MOLINITO": 200,
+        "MOLINITO X PISTA + CASETA": 220,
+        "OLIMPIADA(+ CASETA DE IDA)": 220,
+        "PARQUE INDUSTRIAL NAUCALPAN": 220,
+        "PASEO DEL BOSQUE DE ECHEGARAY": 240,
+        "PEDREGAL DE ECHEGARAY": 240,
+        "PEDREGAL, CANTERAS": 150,
+        "PLAN DE AYALA": 170,
+        "PLAZA HIPODROMO ANTES DEL CABALLO BALLO": 150,
+        "PRADERAS DE SAN MATEO": 270,
+        "RINCON DE ECHEGARAY": 230,
+        "RINCON DEL BOSQUE": 230,
+        "RINCON VERDE": 300,
+        "RIO HONDO": 150,
+        "SAN ANTONIO SOMEYUCAN": 190,
+        "SAN BARTOLO NAUCALPAN CENTRO": 220,
+        "SAN ESTEBAN": 200,
+        "SAN FRANCISCO CHIMALPA (+ CASETA DE IDA)": 330,
+        "SAN FRANCISCO CUAUTLALPAN": 220,
+        "SAN JOSE POZA HONDA(+ CASETA DE IDA)": 260,
+        "SAN JUAN TOTOLTEPEC": 270,
+        "SAN LORENZO TOTOLINGA Y LA RAQUELITO": 260,
+        "SAN LUIS TLATILCO": 220,
+        "SAN RAFAEL CHAMAPA 1RA Y 2DA SECCION": 220,
+        "SAN RAFAEL CHAMAPA 3RA Y 4TA SECCION": 240,
+        "SANJOSE DE LOS LEONES 1RA Y 2DA SECCION": 220,
+        "SANJOSE DE LOS LEONES 3RA SECCION": 230,
+        "SANTA CRUZ ACATLAN": 260,
+        "SANTA CRUZ DEL MONTE": 280,
+        "SANTA ROSA": 280,
+        "TECAMACHALCO AV DE LAS FUENTES": 130,
+        "TECAMACHALCO AV DE LOS BOSQUES": 100,
+        "TECAMACHALCO ZONA DE BANCOS": 130,
+        "VALLE DORADO (CHAMAPA)": 250,
+        "VICENTE GUERRERO": 200,
+        "VISTA DEL VALLE": 250,
+
+      // ===ACOLMAN ===
+        "LOS REYES TEPEXPAN": 630,
+        "ACOLMAN CENTRO": 750,
+        "AMPLACIÓN LOS ÁNGELES": 600,
+        "ANAHUAC": 640,
+        "BENITO JUÁREZ": 630,
+        "DOS ZANJAS": 620,
+        "EMILIANO ZAPATA": 600,
+        "LA ERA": 600,
+        "LAS GRANJAS ALCOMAN": 630,
+        "LÁZARO CÁRDENAS": 600,
+        "LOMAS DE SANTA CATARINA": 640,
+        "LOS ÁNGELES": 600,
+        "PLAN DE GUADALUPE": 620,
+        "PUEBLO DE CAUNALAN": 640,
+        "RADIO FARO TOTOLCINGO": 620,
+        "SAN FRANCISCO ZACANGO": 660,
+        "SAN MATEO CHIPILTEPEC": 660,
+        "SAN MIGUEL TOTOLCINGO": 620,
+        "SANTA CATARINA ALCOMAN": 640,
+        "SANTA CRUZ": 610,
+        "SANTA MARÍA DE GUADALUPE": 640,
+        "TENANGO": 650,
+        "TEPEXPAN CENTRO": 630,
+        "TETEZCALA": 630,
+
+      // === ATIZAPAN ===
+        "5 DE MAYO": 370,
+        "ADOLFO LOPEZ MATEOS": 380,
+        "ALAMEDAS": 330,
+        "ALFREDO V BONFIL": 370,
+        "ARBOLEDAS": 350,
+        "ATIZAPAN CENTRO": 350,
+        "ATIZAPAN MODERNO": 320,
+        "ATIZAPAN 2000": 370,
+        "BOSQUES DE IXTACALA": 405,
+        "BOSQUES DE PRIMAVERA": 405,
+        "BOSQUES DEL LAGO": 415,
+        "CENTRAL DE ABASTOS": 350,
+        "CERRO GRANDE": 360,
+        "CHILUCA (+CASETA DE IDA)": 390,
+        "CLUB DE GOLF BELLA VISTA": 330,
+        "CLUB DE GOLF CHILUCA": 390,
+        "CLUB DE GOLF HACIENDA": 370,
+        "CLUB DE GOLF VALLE ESCONDIDO": 400,
+        "CONDADO DE ZAYAVEDRA": 400,
+        "CONDO PLAZAS CHILUCA": 390,
+        "EJIDO ESPIRITO SANTO": 390,
+        "EJIDOS DE SAN MIGUEL": 390,
+        "EL CALVARIO": 310,
+        "EL CERRITO": 360,
+        "LOMA DE VALLE ESCONDIDO": 380,
+        "LOMAS DE ATIZAPAN 1RA SECCION": 360,
+        "LOMAS DE ATIZAPAN 2DA SECCION": 370,
+        "LOMAS DE BELLA VISTA": 290,
+        "LOMAS CAPISTRANO": 330,
+        "LOMAS DE GUADALUPE": 320,
+        "LOMAS DE LA HACIENDA": 370,
+        "LOMAS MONTEMARIA": 385,
+        "LOMAS DE SAN MIGUEL": 385,
+        "LOMAS LINDAS": 375,
+        "LOS ALAMOS": 380,
+        "LOS CLUBES": 375,
+        "LUIS DONALDO COLOSIO": 375,
+        "MARGARITA MAZA DE JUAREZ": 375,
+        "MAYORAZGOS DEL BOSQUE": 340,
+        "MAYORAZGOS DE LOS GIGANTES": 375,
+        "MEXICO 86": 380,
+        "MEXICO NUEVO": 375,
+        "MIRAFLORES": 400,
+        "MORELOS": 320,
+        "PALACIO MUNICIPAL": 320,
+        "PARAISO AVICOLA": 350,
+        "PEDREGAL DE ATIZAPAN": 375,
+        "PLAZA ATIZAPAN": 370,
+        "EL CHAPARRAL": 320,
+        "EL PEDREGAL": 370,
+        "EMILIANO ZAPATA": 400,
+        "EX HACIENDA EL PEDREGAL": 405,
+        "CALACOAYA": 320,
+        "IZCALLI EL CAMPANARIO": 360,
+        "PRADO LARGO": 370,
+        "HACENDA DE LA LUZ": 380,
+        "HACIENDA VALLE ESCONDIDO": 390,
+        "HOGARES DE ATIZAPAN": 370,
+        "IGNACIO LOPEZ RAYON": 310,
+        "JARDINES DE ATIZAPAN": 320,
+        "JARDINES DE BELLA VISTA": 300,
+        "JARDINES DE MONTERREY": 370,
+        "LA CAÑADA": 320,
+        "LA CONDESA": 340,
+        "LA ESTADIA": 400,
+        "LA PALMA": 400,
+        "LAS FLORES": 335,
+        "LAS PEÑITAS": 375,
+        "LAS AGUILAS": 370,
+        "LAS PEÑITAS 1": 385,
+        "PRADOS DE IZTACALA": 385,
+        "CRISTOBAL HIGUERA": 325,
+        "REVOLUCION": 400,
+        "RINCON DE LOS BOSQUES": 350,
+        "RINCONADA LAS ARBOLEDAS": 350,
+        "SAGITARIO 1": 375,
+        "SAGITARIO 2": 385,
+        "SAN JOSE DEL JARAL": 375,
+        "SAN JUAN BOSCO": 365,
+        "SAN JUAN IXTACALA": 375,
+        "SAN MATEO TECOLOAPAN": 375,
+        "SAN MIGUEL XOCHIMANDA": 375,
+        "TECNOLOGICO DE MONTERREY (MAS CASETAS)": 400,
+        "TEPALCAPA": 375,
+        "TORRES DE ATIZAPAN": 335,
+        "UNITEC": 320,
+        "VALLE NUEVO": 335,
+        "VALLE DE ARBOLEDAS": 365,
+        "VILLA DE LAS PALMAS": 400,
+        "VILLA DE LAS TORRES": 385,
+        "VILLA JARDIN": 375,
+        "VILLAS DE LA HACIENDA": 385,
+        "VILLAS DE SAN JOSE": 375,
+
+      // === coacalco ===
+        "ARBOLEDAS DE COACALCO": 500,
+        "BOSQUES DE COACALCO": 485,
+        "BOSQUES DEL VALLE 1RA SECCION": 425,
+        "BOSQUES DEL VALLE 2DA SECCION": 435,
+        "CAPULLI DEL VALLE": 425,
+        "CONJUNTO JALATLACO": 455,
+        "CONJUNTO COACALCO": 455,
+        "CONJUNTO DEL VALLE": 455,
+        "CONJUNTO INDEPENDENCIA": 470,
+        "CONJUNTO MAGNOLIAS": 480,
+        "EL PANTANO": 470,
+        "EL PERIODISTA": 430,
+        "EL POTRERO": 480,
+        "HACIENDA DE SAN FELIPE": 460,
+        "EX RANCHO SAN FELIPE": 460,
+        "FRACCIONAMIENTO EL LAUREL": 460,
+        "FRACCIONAMIENTO CHAPARRAL": 460,
+        "FUENTE DE SAN FRACISCO": 460,
+        "GRANJAS DE SAN CRISTOBAL": 480,
+        "HACIENDA DE CRUZTITLAN": 430,
+        "HACIENDA SAN PABLO": 470,
+        "JARDINES DE SAN JOSE": 470,
+        "LAS HIEDRAS": 460,
+        "LAS LLANURAS": 490,
+        "LAS VILLAS": 470,
+        "LOMA BONITA": 435,
+        "LOMAS DE COACALCO": 455,
+        "LOMAS DEL SOL": 425,
+        "LOS ACUALES": 470,
+        "PARQUE RECIDENCIAL COACALCO 1RA SECC.": 470,
+        "PARQUE RECIDENCIAL COACALCO 2DA SECC.": 480,
+        "PARQUE RECIDENCIAL COACALCO 3RA SECC.": 490,
+        "PLAZA DE KIOSKO": 490,
+        "PLAZA LAS FLORES": 470,
+        "REPUBLICA MEXICANA": 460,
+        "RECIDENCIAL VILLA FLORIDA": 470,
+        "RECIDENCIAL COACALCO": 460,
+        "RINCON DE LAS FUENTES": 470,
+        "RINCONADA DE COACALCO": 470,
+        "SAN JOSE EJIDAL": 460,
+        "SAN JOSE EL GIGANTE": 460,
+        "SAN RAFAEL COACALCO": 480,
+        "SANTA MARIA 1": 470,
+        "SANTA MARIA 2": 485,
+        "SANTA MARIA MAGDALENA": 470,
+        "UNIDAD POTRERO LA LAGUNA": 480,
+        "UNIDAD COACALCO": 480,
+        "UNIDAD HABITACIONAL LOS PORTALES": 460,
+        "VILLA DE LAS FLORES": 470,
+        "ZACUATITLAN": 460,
+        "AMPLIACION SAN PABLO": 485,
+        "CASAS ALFA": 485,
+        "CONJUNTO LOS CLAUSTROS": 490,
+        "EL PROGRESO": 490,
+        "EL RELOJ": 485,
+        "EL ROSIO": 485,
+        "FRACCIONAMIENTO EL PARO": 490,
+        "FRACCIONAMIENTO ESTEPAS": 485,
+        "GRANJAS SAN PABLO": 480,
+        "INFONAVIT L64": 485,
+        "INFONAVIT L82": 485,
+        "INFONAVIT LA ISLA": 485,
+        "IZCALLI SAN PABLO": 485,
+        "JOSE MARIA MORELOS Y PAVON": 485,
+        "LA ARBOLADA": 440,
+        "LA AURORA": 490,
+        "LA LLANURA VERDE": 485,
+        "LOS ARCOS 1": 480,
+        "MARIANO ESCOBEDO": 485,
+        "PARQUE SAN PABLO": 480,
+        "PRADOS DE ECATEPEC": 485,
+        "PRADOS SECCION A": 485,
+        "SAN PABLO DE LAS SALINAS": 480,
+        "SUSTITUCION ARISTA": 485,
+        "UNIDAD HABITACIONAL PENSAMIENTO": 480,
+        
+      // === CHICOLOAPAN ===
+        "BARRIO SAN ANTONIO": 630, 
+        "EJERCITO DEL TRABAJO": 630,  
+        "EL ARENAL": 650,  
+        "EMILIANO ZAPATA": 630,  
+        "GUADALUPE": 630,  
+        "JIMENEZ CANTU": 600,  
+        "LA PALMA": 630,  
+        "LOMA DE BUENA VISTA": 620,  
+        "LOMAS DE SAN PABLO": 630,  
+        "PORTEZUELOS": 620,  
+        "PRESIDENTES": 640,  
+        "REVOLUCION": 620,  
+        "SAN JOSE": 620,  
+        "SAN SEBASTIAN CHIMALPA": 600,  
+        "SAN VICENTE CHICOLAPAN": 630,  
+        "SANTA MARIA CHIMALHUACAN": 630,  
+        "SANTA ROSA": 670,  
+        "UNIDAD HABITACIONAL AURIS": 640,  
+        "VENUSTIANO CARRANZA": 630,
+
+      // === CHIMALHUACÁN ===
+        "2 DE MARZO": 590,
+        "AMPLIACION SAN LORENZO": 560,
+        "ANTORCHISTA": 600,
+        "BALCONES SAN AGUSTIN": 590,
+        "BARRIO ALFAREROS": 570,
+        "BARRIO APAPASCO": 590,
+        "BARRIO CANTEROS": 560,
+        "BARRIO CURTIDORES": 570,
+        "BARRIO EBANISTAS": 570,
+        "BARRIO FUNDIDORES": 590,
+        "BARRIO HOJALATEROS": 570,
+        "BARRIO JUGUETEROS": 550,
+        "BARRIO LA ROSITA": 570,
+        "BARRIO LABRADORES": 570,
+        "BARRIO LAS PALOMAS": 570,
+        "BARRIO ORFEBRES": 570,
+        "BARRIO PLATEROS": 560,
+        "BARRIO SAN HIPOLITO": 560,
+        "BARRIO SARAPEROS": 570,
+        "BARRIO TALABARTEROS": 560,
+        "BARRIO TALLADORES": 550,
+        "BARRIO TEJEDORES": 570,
+        "BARRIO TRANSPORTISTAS": 540,
+        "BARRIO VIDRIEROS": 540,
+        "BUENOS AIRES": 560,
+        "CIUDAD ALEGRE": 590,
+        "COPALERA": 600,
+        "EL LLANO": 580,
+        "EL REFUGIO": 600,
+        "EX HACIENDA EL MOLINO": 580,
+        "FILIBERTO GOMEZ": 580,
+        "ISRAEL": 580,
+        "JARDINES DE ACUITLAPILCO": 600,
+        "JARDINES SAN AGUSTIN": 580,
+        "LA JOYITA": 580,
+        "LOMA DE CHIMALHUACAN": 590,
+        "LOMA DE SANTA CRUZ": 560,
+        "LOMAS DE SANTA MARIA": 590,
+        "LUIS CORDORA REYES": 590,
+        "MARAVILLAS": 570,
+        "NUEVA MARGARITA": 570,
+        "OLMEDO": 570,
+        "SAN JOSE BUENA VISTA": 590,
+        "SAN JUAN": 570,
+        "SAN LORENZO": 570,
+        "SAN LORENZO PARTE ALTA": 570,
+        "SAN MIGUEL": 600,
+        "SAN NORBERTO": 570,
+        "SAN PABLO": 570,
+        "SAN PEDRO": 580,
+        "SANTA MARIA CHIMALHUACAN": 580,
+        "TEPALCATES": 600,
+        "TEQUESQUINAHUAC": 580,
+        "TIERRA SANTA": 570,
+        "TLAIXCO": 570,
+        "TLATELCO": 550,
+        "TLAYACAPA": 570,
+        "VILLA DE LOS COLORINES": 570,
+        "VILLA SAN LORENZO CHIMALCO": 560,
+        "XALTIPAC": 550,
+        "XOCHIACA": 550,
+        "XOCHITENCO": 590,
+
+      // === CUAUTITLÁN IZCALLI ===
+        "ARBOLEDAS DE SAN MIGUEL": 445,
+        "ARCOS DE LA HACIENDA": 435,
+        "ARCOS DEL ALBA": 420,
+        "ATLANTA": 420,
+        "BARRIO CONASUPO": 445,
+        "BARRIO DEL PANTEON": 445,
+        "BARRO HUAPANGO": 455,
+        "BARRIO JALTIPA": 465,
+        "BARRIO LOS ARCOS": 435,
+        "BELLA VISTA": 445,
+        "BOSQUES DE LA HACIENDA": 445,
+        "BOSQUES DE LOS PINOS": 455,
+        "BOSQUES DE MORELOS": 455,
+        "BOSQUES DE ALBA": 455,
+        "BOSQUE DE ALBA II": 420,
+        "CAMPESTRE DEL LAGO": 400,
+        "CIUDAD WAL MART": 420,
+        "CLAUSTROS DE SAN MIGUEL": 420,
+        "COFRADA DE SAN MIGUEL": 420,
+        "COLINAS DEL LAGO": 415,
+        "COLONIA DEL TEPEYAC": 390,
+        "COMPLEJO INDUSTRIAL COAMATLA": 420,
+        "CORREDOR URBANO COMERCIAL": 400,
+        "CUMERIA": 415,
+        "DR. JORGE JIMENEZ CANTU": 445,
+        "EJIDAL SAN ISIDRO": 425,
+        "EJIDO SANTA TERESA": 440,
+        "EJIDO SAN LUCAS": 445,
+        "EJIDOS SAN ISIDRO": 425,
+        "EL CERRITO": 465,
+        "EL PROGRESO": 400,
+        "EL ROSARIO": 420,
+        "EN SUEÑOS": 420,
+        "EX HACIENDA SAN MIGUEL": 415,
+        "UNAM CUAUTITLAN": 400,
+        "FRANCISCO VILLA": 400,
+        "GALAXIA": 415,
+        "GRANJAS LOMAS DE GUADALUPE": 455,
+        "GRANJAS UNIDAS": 410,
+        "HACIENDA EL PARQUE": 410,
+        "INFONAVIT CAMPO 1": 410,
+        "INFONAVIT FERROCARRILERA": 490,
+        "INFONAVIT FIDEL VELASQUEZ": 490,
+        "INFONAVIT NORTE": 490,
+        "INFONAVIT SUR": 400,
+        "VILLAS DE LAS FLORES": 420,
+        "UNIDAD HABITACIONAL FOVISSA": 425,
+        "UNIDAD HABITACIONAL NOPALTEPEC": 440,
+        "VALLE DE LA HACIENDA": 445,
+        "VALLE DE LAS FLORES": 425,
+        "INFONAVIT TEPALCAPA": 440,
+        "JARDINES DE LA HACIENDA NORTE": 445,
+        "JARDINES DE LA HACIENDA SUR": 455,
+        "JARDINES DEL ALBA": 400,
+        "JOSE MARIA MORELOS Y PAVON": 425,
+        "JOYAS DE ALBA": 415,
+        "LA AURORA": 455,
+        "LA HERRADURA": 410,
+        "LA JOYITA": 410,
+        "LA PERLA": 400,
+        "LA PIEDAD": 385,
+        "LA PRESITA": 425,
+        "LA QUEBRADA": 410,
+        "LAGO DE GUADALUPE": 455,
+        "LAS CONCHITAS": 410,
+        "LAS TORRES": 465,
+        "LECHERIA": 420,
+        "LOMAS DE CUATITLAN": 420,
+        "LOMAS DEL BOSQUE": 420,
+        "LOS ANGELES": 485,
+        "LUIS ECHEVERRIA": 425,
+        "MIRADOR SANTA ROSA": 450,
+        "MONTE VERDE": 440,
+        "NIÑOS HEROES": 445,
+        "PALACIO MUNICIPAL": 425,
+        "PASEOS DEL ALBA": 400,
+        "PERINORTE": 385,
+        "PLAZA DORADA": 455,
+        "PRADOS DE CUATITLAN": 410,
+        "RINCON COLONIAL": 465,
+        "SAN ANTONIO": 420,
+        "SAN FRANCISCO TEPOJACO CENTRO": 420,
+        "SAN ISIDRO": 415,
+        "SAN JOSE HILANGO": 455,
+        "SAN JUAN": 410,
+        "SAN JUAN ATLANCA": 425,
+        "SAN MARTIN TEPEXTITLAN": 410,
+        "SAN MATEO IXTACALCO LA CAPILA": 465,
+        "SAN MATEO IXTACALCO LA NORIA": 420,
+        "SAN PABLO LOS GALLOS": 420,
+        "SANTA MARIA GUADALUPE": 420,
+        "SANTA MARIA TIANGUISTENGO": 415,
+        "SANTA ROSA DE LIMA": 455,
+        "SANTIAGO TEPALCPA": 410,
+        "TIKAL": 480,
+        "UNIDAD CIVICA BACARDY": 425,
+        "VILLAS DE ALBA": 400,
+        "VISTA HERMOSA": 385,
+        "ZONA INDUSTRIAL CUAUTITLAN IZCALLI": 455,
+        "ZONA INDUSTRIAL SAN MARTIN OBISPO": 410,
+
+      // === CUAUTITLÁN DE ROMERO RUBIO ===
+        "BARRIO DEL CARMEN": 500,
+        "BARRIO EL HUERTO": 480,
+        "CONJUNTO INDUSTRIAL CUAUTITLAN": 440,
+        "CONJUNTO TLATEPAN": 480,
+        "CUAUTITLAN CEBADALES": 485,
+        "CUAUTITLAN CENTRO": 470,
+        "EL NOPALITO": 480,
+        "EL PARAISO PROVISSTE": 450,
+        "PARAISO": 450,
+        "EL REPARTIDOR": 440,
+        "LA CIUDADELA": 450,
+        "LA ESTANCIA": 490,
+        "LA PALMA": 440,
+        "LA MISIONES": 455,
+        "LAZARO CARDENAS": 485,
+        "LOMA BONITA": 425,
+        "LOS MORALES": 480,
+        "LOS OLIVOS": 485,
+        "MELCHOR OCAMPO CENTRO": 525,
+        "NECAPA": 450,
+        "NUEVA ESPAÑITA": 440,
+        "PASEOS DE CUAUTITLAN": 450,
+        "RANCHO SAN BLAS": 480,
+        "ROMITA": 485,
+        "SAN JUAN": 485,
+        "SANTA ELENA": 500,
+        "SANTA MARIA": 490,
+        "SAN MATEO IZTACALCO": 490,
+        "JUAN DIEGO": 485,
+        "SAN BLAS": 480,
+        "VILLA JARDIN": 440,
+        "VILLAS DE CUAUTITLAN": 490
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const coloniaSelect = document.getElementById('colonia');
+      const precioDiv = document.getElementById('precio');
+
+      coloniaSelect.addEventListener('change', () => {
+        const seleccion = coloniaSelect.value;
+        if (tarifas[seleccion]) {
+          precioDiv.textContent = `Precio estimado: $${tarifas[seleccion]} MXN`;
+          precioDiv.style.display = 'block';
+        } else {
+          precioDiv.textContent = '';
+          precioDiv.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
